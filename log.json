@@ -1,0 +1,13 @@
+{
+  "project": "CHRONOGRAPH // 01",
+  "nodes": [
+    {"id":"n-001","type":"mutation","text":"Génesis del sistema: descartar listas lineales y modelar el avance como campo gravitacional.","timestamp":"2026-11-18T10:15:00.000Z"},
+    {"id":"n-002","type":"friction","text":"Bloqueo en sincronización: colisión de SHA en commits concurrentes contra la API de GitHub.","timestamp":"2026-11-18T14:40:00.000Z"},
+    {"id":"n-003","type":"flow","text":"Resuelto: cola secuencial con lectura previa de SHA y codificación UTF-8 segura en Base64.","timestamp":"2026-11-19T09:05:00.000Z"},
+    {"id":"n-004","type":"flow","text":"Sintetizador Web Audio integrado. El lienzo responde con armónicos al conectar causalidades.","timestamp":"2026-11-19T15:30:00.000Z"}
+  ],
+  "links": [
+    {"from":"n-001","to":"n-004"},
+    {"from":"n-002","to":"n-003"}
+  ]
+}
