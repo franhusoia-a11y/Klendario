@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRONÓGRAFO TOPOGRÁFICO // TELEMETRÍA DE PROYECTO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="chronograph"></canvas>
+  <header class="hud hud-top-left">
+    <div class="brand-row"><span class="status-led" id="coreLed"></span><h1 id="projectTitle">CHRONOGRAPH // 01</h1></div>
+    <div class="telemetry-grid">
+      <div><span class="lbl">IMPULSOS</span><span class="val" id="statNodes">000</span></div>
+      <div><span class="lbl">HILOS</span><span class="val" id="statLinks">000</span></div>
+      <div><span class="lbl">ESTADO</span><span class="val" id="statState">NOMINAL</span></div>
+      <div><span class="lbl">SYNC</span><span class="val" id="statSync">LECTURA</span></div>
+    </div>
+  </header>
+  <aside class="hud hud-top-right">
+    <button class="tactile-btn" id="btnAudio" title="Alternar sintetizador Web Audio"><span class="dot" id="audioDot"></span> AUDIO</button>
+    <button class="tactile-btn" id="btnCenter" title="Recentrar en el Núcleo (C)">[ ⌖ ] NÚCLEO</button>
+    <button class="tactile-btn accent" id="btnConfig" title="Configurar enlace GitHub API">API // PAT</button>
+  </aside>
+  <section class="hud inspector hidden" id="inspector">
+    <div class="inspector-head"><span class="badge" id="insType">FLUJO</span><span class="timestamp" id="insTime">00:00:00</span><button class="close-x" id="insClose">×</button></div>
+    <p class="inspector-text" id="insText"></p>
+    <div class="inspector-actions"><button class="tactile-btn" id="btnLinkMode">TRAZAR HILO DE CAUSALIDAD</button><span class="hint">o Shift + Clic en otro nodo</span></div>
+  </section>
+  <div class="link-banner hidden" id="linkBanner">MODO CAUSALIDAD ACTIVO — SELECCIONÁ EL NODO DESTINO (ESC PARA CANCELAR)</div>
+  <section class="hud hud-xray">
+    <div class="xray-header"><span class="lbl">RAYOS X // GÉNESIS</span><span class="val" id="xrayReadout">100% [T-0]</span></div>
+    <input type="range" id="xraySlider" min="0" max="1" value="1" step="1" />
+  </section>
+  <div class="cmd-dock" id="cmdDock">
+    <div class="cmd-modes" role="radiogroup" aria-label="Tipo de impulso">
+      <button class="mode-pill active" data-type="flow"><span class="swatch flow"></span>FLUJO</button>
+      <button class="mode-pill" data-type="friction"><span class="swatch friction"></span>FRICCIÓN</button>
+      <button class="mode-pill" data-type="mutation"><span class="swatch mutation"></span>MUTACIÓN</button>
+    </div>
+    <form id="cmdForm" class="cmd-form" autocomplete="off">
+      <span class="cmd-prompt">&gt;_</span>
+      <input type="text" id="cmdInput" placeholder="Registrar impulso... (⌘K / Ctrl+K | prefijos: /f /b /m)" maxlength="240" />
+      <button type="submit" class="cmd-submit">EMITIR ↵</button>
+    </form>
+  </div>
+  <div class="modal-backdrop hidden" id="configModal">
+    <div class="modal-panel">
+      <div class="modal-head"><span>ENLACE DE TELEMETRÍA // GITHUB REST API</span><button class="close-x" id="modalClose">×</button></div>
+      <p class="modal-desc">Sin token, el cronógrafo opera en <strong>modo lectura pública</strong> desde <code>./log.json</code>. Al ingresar un Fine-Grained PAT, cada impulso y conexión genera un commit silencioso automático.</p>
+      <form id="configForm">
+        <label><span>REPOSITORIO (usuario/repo)</span><input type="text" id="cfgRepo" placeholder="ej: tu-usuario/cronografo-topografico" required /></label>
+        <label><span>RAMA (branch)</span><input type="text" id="cfgBranch" value="main" required /></label>
+        <label><span>GITHUB PERSONAL ACCESS TOKEN (PAT)</span><input type="password" id="cfgToken" placeholder="github_pat_..." required /></label>
+        <div class="modal-actions"><button type="button" class="tactile-btn danger" id="btnClearConfig">DESVINCULAR</button><button type="submit" class="tactile-btn accent">GUARDAR Y CONECTAR</button></div>
+      </form>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
